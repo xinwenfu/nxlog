@@ -1,6 +1,10 @@
 # Send Windows Event Logs (via NXLog) → rsyslog on Kali Linux
 
-## Install rsyslog on Kali
+Tools:
+- NXLog Community Edition (Windows)
+- rsyslog (Kali Linux)
+
+## 1. Install rsyslog on Kali
 
 On Kali Linux, syslogd is usually provided by rsyslog, which is the modern replacement for the old syslogd daemon.
 Here’s how you can enable and verify it:
@@ -50,13 +54,7 @@ For example:
 sudo systemctl restart rsyslog
 ```
 
-## Send Windows Event Logs to Kali Linux
-
-Tools:
-- NXLog Community Edition (Windows)
-- rsyslog (Kali Linux)
-
-### Step 1: Ensure rsyslog on Kali is ready to receive logs
+## 2. Configure rsyslog on Kali
 
 By default, rsyslog listens only locally (not over the network), so we need to enable remote logging.
 
@@ -95,8 +93,9 @@ udp   0   0 0.0.0.0:514   0.0.0.0:*   1234/rsyslogd
 tcp   0   0 0.0.0.0:514   0.0.0.0:*   1234/rsyslogd
 ```
 
-### Step 2: Install and configure NXLog on Windows
+## Install and configure NXLog on Windows
 
+### Install NXLog Community Edition (CE)
 Install NXLog Community Edition. Only the agent (not platform) is needed.
 Download **nxlog-6.10.10368_windows_x64.msi** or similar from: https://nxlog.co/downloads
 
@@ -105,11 +104,12 @@ Default config file path:
 C:\Program Files\nxlog\conf\nxlog.conf
 ```
 
+### Configure NXLog CE
 Edit the config file (nxlog.conf) with **Administrator privileges**.
 
 Replace its contents with the following example config:
 
-## This is a minimal example configuration for sending Windows logs to rsyslog
+This is a minimal example configuration for sending Windows logs to rsyslog
 
 ```
 define ROOT C:\Program Files\nxlog
