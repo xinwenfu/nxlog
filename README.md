@@ -206,4 +206,4 @@ Oct 23 09:45:02 WINHOSTNAME Application: Information ...
 
 - Check the firewall on Kali (sudo ufw allow 514/udp)
 - Check Windows firewall (allow outbound UDP 514)
-- Check NXLog logs at C:\Program Files\nxlog\data\nxlog.log
+- Check NXLog logs at C:\Program Files\nxlog\data\nxlog.log to see anything wrong.
