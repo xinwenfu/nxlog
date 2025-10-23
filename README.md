@@ -107,33 +107,76 @@ Edit the config file (nxlog.conf) with **Administrator privileges**.
 
 Replace its contents with the following example config:
 
-This is a minimal example configuration for sending Windows logs to rsyslog
+This is an example configuration for sending Windows logs to rsyslog. Note: nxlog is install at C:\Tools\nxlog.
 
 ```
-define ROOT C:\Program Files\nxlog
-Moduledir %ROOT%\modules
-CacheDir %ROOT%\data
-Pidfile %ROOT%\data\nxlog.pid
-SpoolDir %ROOT%\data
-LogFile %ROOT%\data\nxlog.log
+Panic Soft
+
+define INSTALLDIR C:\Tools\nxlog
+
+#ModuleDir %INSTALLDIR%\modules
+#CacheDir  %INSTALLDIR%\data
+#SpoolDir  %INSTALLDIR%\data
+
+define CERTDIR %INSTALLDIR%\cert
+define CONFDIR %INSTALLDIR%\conf\nxlog.d
+
+# Note that these two lines define constants only; the log file location
+# is ultimately set by the `LogFile` directive (see below). The
+# `MYLOGFILE` define is also used to rotate the log file automatically
+# (see the `_fileop` block).
+define LOGDIR %INSTALLDIR%\data
+define MYLOGFILE %LOGDIR%\nxlog.log
+
+# If you are not using NXLog Manager, disable the `include` line
+# and enable LogLevel and LogFile.
+include %CONFDIR%\*.conf
+
+#LogLevel    INFO
+#LogFile     %MYLOGFILE%
 
 <Extension _syslog>
-    Module      xm_syslog
+    Module  xm_syslog
 </Extension>
+
+# This block rotates `%MYLOGFILE%` on a schedule. Note that if `LogFile`
+# is changed in managed.conf via NXLog Manager, rotation of the new
+# file should also be configured there.
+<Extension _fileop>
+    Module  xm_fileop
+
+    # Check the size of our log file hourly, rotate if larger than 5MB
+    <Schedule>
+        Every   1 hour
+        <Exec>
+            if ( file_exists('%MYLOGFILE%') and
+                 (file_size('%MYLOGFILE%') >= 5M) )
+            {
+                 file_cycle('%MYLOGFILE%', 8);
+            }
+        </Exec>
+    </Schedule>
+
+    # Rotate our log file every week on Sunday at midnight
+    <Schedule>
+        When    @weekly
+        Exec    if file_exists('%MYLOGFILE%') file_cycle('%MYLOGFILE%', 8);
+    </Schedule>
+</Extension>
+
 
 <Input in>
     Module      im_msvistalog
 </Input>
 
-# No comment after Host, otherwise wrong
+# No extra spaces, quotes, or comments on the same line as Host
 <Output out>
     Module      om_udp
-    Host        192.168.1.10
-    Port        514
+    Host        10.0.2.25:514
     Exec        to_syslog_bsd();
 </Output>
 
-<Route 1>
+<Route r1>
     Path        in => out
 </Route>
 ```
