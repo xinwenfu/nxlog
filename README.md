@@ -1,86 +1,60 @@
+# Send Windows Event Logs (via NXLog) → rsyslog on Kali Linux
+
+## Install rsyslog on Kali
+
 On Kali Linux, syslogd is usually provided by rsyslog, which is the modern replacement for the old syslogd daemon.
 Here’s how you can enable and verify it:
 
-🧩 Step 1: Check if rsyslog is installed
+### Step 1: Check if rsyslog is installed
+```
 dpkg -l | grep rsyslog
-
+```
 
 If it’s not installed, run:
-
+```
 sudo apt update
 sudo apt install rsyslog -y
-
-🧩 Step 2: Enable and start the syslog (rsyslog) service
+```
+### Step 2: Enable and start the syslog (rsyslog) service
+```
 sudo systemctl enable rsyslog
 sudo systemctl start rsyslog
-
+```
 
 This ensures it starts automatically on boot and runs immediately.
 
-🧩 Step 3: Verify that it’s running
+### Step 3: Verify that it’s running
+```
 sudo systemctl status rsyslog
-
+```
 
 You should see “active (running)” in green.
 
-🧩 Step 4: Check the default log directory
+### Step 4: Check the default log directory
 
 By default, logs go under:
-
+```
 /var/log/
-
+```
 
 For example:
-
+```
 /var/log/syslog — general system messages
-
 /var/log/auth.log — authentication messages
-
 /var/log/kern.log — kernel messages
-
-🧩 Optional: Enable remote logging
-
-If you want syslogd (rsyslog) to send logs to a remote IP (e.g., 192.168.1.10):
-
-Edit the rsyslog config:
-
-sudo nano /etc/rsyslog.conf
+```
 
 
-Uncomment or add this line near the end:
-
-*.* @@192.168.1.10:514
-
-
-@@ = TCP
-
-@ = UDP
-
-Restart the service:
-
+### Restart the service:
+```
 sudo systemctl restart rsyslog
+```
 
-
-Verify that logs are being sent (you can use tcpdump or nc -ul 514 on the remote host).
-
-Would you like me to show how to test rsyslog remote logging to confirm logs are reaching the destination IP?
-
-You said:
-how do I configure nxlog on WIndows to send logs to rsyslog on Kali?
-ChatGPT said:
-
-Perfect — that’s a common and useful setup for centralized logging. Let’s go step-by-step so your Windows NXLog agent can send logs to your Kali rsyslog server over either UDP or TCP (typically on port 514).
-
-🧭 Overview
-
-Goal:
-Send Windows Event Logs (via NXLog) → rsyslog on Kali Linux
+## Send Windows Event Logs to Kali Linux
 
 Tools:
-
-NXLog Community Edition (Windows)
-
-rsyslog (Kali Linux)
+- NXLog Community Edition (Windows)
+- rsyslog (Kali Linux)
 
 🧩 Step 1: Ensure rsyslog on Kali is ready to receive logs
 
