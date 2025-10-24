@@ -97,6 +97,11 @@ tcp   0   0 0.0.0.0:514   0.0.0.0:*   1234/rsyslogd
 Install NXLog Community Edition. Only the agent (not platform) is needed.
 Download **nxlog-6.10.10368_windows_x64.msi** or similar from: https://nxlog.co/downloads
 
+NXLog is installed as a service in Windosw as shown by the Windosws **Services** app below.
+
+[NXLog Service](imgs/nxlog-event.png)
+
+
 ## 4. Configure NXLog CE
 Default config file path:
 ```
