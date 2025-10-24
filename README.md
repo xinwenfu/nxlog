@@ -105,9 +105,7 @@ C:\Program Files\nxlog\conf\nxlog.conf
 
 Edit the config file (nxlog.conf) with **Administrator privileges**.
 
-Replace its contents with the following example config:
-
-This is an example configuration for sending Windows logs to rsyslog. **Note**: nxlog is installed at C:\Tools\nxlog.
+Below is an example config for sending Windows logs to rsyslog. **Note**: nxlog is installed at C:\Tools\nxlog.
 
 ```
 Panic Soft
