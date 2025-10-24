@@ -48,12 +48,6 @@ For example:
 /var/log/kern.log — kernel messages
 ```
 
-
-### Restart the service:
-```
-sudo systemctl restart rsyslog
-```
-
 ## 2. Configure rsyslog on Kali
 
 By default, rsyslog listens only locally (not over the network), so we need to enable remote logging.
