@@ -99,7 +99,7 @@ Download **nxlog-6.10.10368_windows_x64.msi** or similar from: https://nxlog.co/
 
 NXLog is installed as a service in Windosw as shown by the Windosws **Services** app below.
 
-[NXLog Service](imgs/nxlog-event.png)
+<img src="imgs/nxlog-event.png" width=640>
 
 
 ## 4. Configure NXLog CE
