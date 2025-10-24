@@ -128,8 +128,8 @@ define MYLOGFILE %LOGDIR%\nxlog.log
 # and enable LogLevel and LogFile.
 include %CONFDIR%\*.conf
 
-#LogLevel    INFO
-#LogFile     %MYLOGFILE%
+LogLevel    INFO
+LogFile     %MYLOGFILE%
 
 <Extension _syslog>
     Module  xm_syslog
