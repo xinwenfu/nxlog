@@ -1,4 +1,4 @@
-# Send Windows Event Logs (via NXLog) → rsyslog on Kali Linux
+# Send Windows Event Logs via NXLog to rsyslog on Kali Linux
 
 **Tools**:
 - NXLog Community Edition (CE) on Windows
