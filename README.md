@@ -102,7 +102,7 @@ Default config file path:
 C:\Program Files\nxlog\conf\nxlog.conf
 ```
 
-Edit the config file (nxlog.conf) with **Administrator privileges**. For example, run *Notepad++* as the adminstrator: Search Notepad++ within Windows *Search*; right click *Notepad++* and Run as adminstrator" as shown below.
+Edit the config file (nxlog.conf) with **Administrator privileges**. For example, run *Notepad++* as the adminstrator: Search Notepad++ within Windows *Search*; right click *Notepad++* and *Run as adminstrator* as shown below.
 
 <img src="imgs/run-as-admin.png" width=640>
 
@@ -185,7 +185,7 @@ LogFile     %MYLOGFILE%
 
 Note: If you prefer TCP, change om_udp to om_tcp.
 
-Save and restart NXLog service:
+Save and restart NXLog service within cmd or powershell with the adminstrator priviledge:
 ```
 net stop nxlog
 net start nxlog
